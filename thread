@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Get the number of threads to create from command line argument
+num_threads=$1
+
+# Function to execute in each "thread"
+thread_function() {
+  echo "Thread $1 with priority $2 started"
+  echo "Thread $1 PID: $$"
+  echo "Hello from thread $1"
+  sleep 2 # simulate some work
+  echo "Thread $1 finished"
+}
+
+# Loop to create the "threads"
+for (( i=0; i<$num_threads; i++ )); do
+  read -p "Enter priority for thread $i: " priority
+  # Run the thread function in the background with the given priority
+  nice -n $priority bash -c "thread_function $i $priority" &
+done
+
+# Wait for all background "threads" to finish
+wait
