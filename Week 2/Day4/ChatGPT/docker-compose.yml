@@ -1,6 +1,17 @@
 version: '3.8'
 
 services:
+  api:
+    image: jabenjam/chatgpt-api
+    restart: always
+    depends_on:
+      - database
+    environment:
+      spring.datasource.url: "jdbc:mysql://database:3306/employee_management_system?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true"
+      OPENAI_API_KEY: "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"
+    ports:
+      - "8080:8080"
+
   database:
     image: mysql:latest
     restart: always

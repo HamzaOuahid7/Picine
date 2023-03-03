@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class ChatGPTService { /// faut faire un interface 
+public class ChatGPTService {
     private ConversationRepository conversationRepository;
     public ChatGPTService(ConversationRepository conversationRepository){
         this.conversationRepository=conversationRepository;
@@ -29,8 +29,8 @@ public class ChatGPTService { /// faut faire un interface
             String token = openaiToken;
 
             if (token == null) {
-                System.err.println("OPENAI_API_KEY environment variable not set"); // logger
-                System.exit(1);///jamais
+                System.err.println("OPENAI_API_KEY environment variable not set");
+                System.exit(1);
             }
 
             com.theokanning.openai.service.OpenAiService service = new OpenAiService(token);
