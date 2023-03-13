@@ -1,0 +1,34 @@
+How Oauth work:
+
+Suppose ben wants to grant access to his photos on Facebook to Ismail photo-printing website without giving away his Facebook password.
+
+ismail's website sends a request to facebook's API server to access ben's photos.
+
+facebook's API server sends a response containing a request token and a request token secret to ismail's website. The request token identifies ismail's request, and the request token secret is used to sign future requests.
+
+ismail's website redirects ben's browser to facebook's authorization server along with the request token.
+
+facebook's authorization server presents ben with a login page and asks her if she wants to grant ismail's website access to her photos.
+
+ben enters her facebook username and password on the login page and clicks "Allow."
+
+facebook's authorization server sends a response containing an access token and an access token secret to ben's browser.
+
+ben's browser redirects back to ismail's website along with the access token.
+
+ismail's website sends a request to facebook's API server to access ben's photos along with the access token.
+
+facebook's API server validates the access token and, if valid, sends a response containing ben's photos to ismail's website.
+
+-----------------------------------------------------------------------------------------------------------
+
+design solutions possible to implement OAuth from a Resource provider perspective :
+To implement OAuth from a resource provider perspective you need to have an api that allows the third party app to access the data not only that he need to check the scope given by the access token so he can allow or deny a certain request and speaking of token he must have a token management system than can manage access token and refresh	token and on top of that he must monitor the third party app what is doing 
+
+--------------------------------------------------------------------------------------------------------------
+
+OIDC stands for OpenID Connect, which is an authentication protocol built on top of OAuth 2.0. It provides a standardized way to authenticate users, allowing them to log in to applications using an identity provider (IdP) like Google, Facebook, or Microsoft. OIDC adds a layer of identity verification to OAuth 2.0, making it easier for applications to verify the user's identity and obtain information about them.
+
+One use case where OIDC is needed is when an application needs to verify a user's identity and obtain additional information about them, such as their email address or profile picture. In this case, OAuth 2.0 alone is not enough because it only provides authorization for accessing protected resources, but does not provide any information about the user.
+
+For example an webapp that let the user share his pictures and react to others in this case to use this app you need to create an account or use a idP like google in this case when the app need to know the data about the user it must be provider via ID token sent by OIDC in for of a JWT
